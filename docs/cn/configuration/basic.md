@@ -8,6 +8,9 @@
 ./cli-proxy-api --config /path/to/your/config.yaml
 ```
 
+> macOS 通过 Homebrew 安装并以 `brew services` 运行时，默认读取 `$(brew --prefix)/etc/cliproxyapi.conf`（Apple Silicon 常见为 `/opt/homebrew/etc/cliproxyapi.conf`，Intel 常见为 `/usr/local/etc/cliproxyapi.conf`）。
+> 若希望沿用 `~/.cli-proxy-api/config.yaml`，可将其软链接到该默认路径。
+
 ### 配置文件示例
 
 ```yaml
