@@ -24,7 +24,7 @@ remote-management:
   # 设置为false，可以通过http://YOUR_SERVER_IP:8317/management.html打开WebUI
   disable-control-panel: false
 
-# 认证文件存放目录，用于存放Gemini CLI、Gemini Web、Qwen Code、Codex的认证文件
+# 认证文件存放目录，用于存放 Gemini CLI、Gemini Web、Claude Code、Codex 的认证文件
 # 默认设置，是在你当前账户目录下的.cli-proxy-api文件夹，适配Windows和Linux环境
 # 程序首次启动时会自动创建该文件夹
 # Windows下默认为C:\Users\你的用户名\.cli-proxy-api

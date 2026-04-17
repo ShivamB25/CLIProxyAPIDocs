@@ -228,7 +228,7 @@ ampcode:
 
 # 全局 OAuth 模型名称别名（按渠道）
 # 这些别名同时用于模型列表和请求路由的模型 ID 重命名。
-# 支持的渠道：gemini-cli、vertex、aistudio、antigravity、claude、codex、qwen、iflow。
+# 支持的渠道：gemini-cli、vertex、aistudio、antigravity、claude、codex。
 # 注意：别名不适用于 gemini-api-key、codex-api-key、claude-api-key、openai-compatibility、vertex-api-key 或 ampcode。
 # 您可以使用不同的别名重复相同的名称，以暴露多个客户端模型名称。
 oauth-model-alias:
@@ -263,12 +263,6 @@ oauth-model-alias:
 #   codex:
 #     - name: "gpt-5"
 #       alias: "g5"
-#   qwen:
-#     - name: "qwen3-coder-plus"
-#       alias: "qwen-plus"
-#   iflow:
-#     - name: "glm-4.7"
-#       alias: "glm-god"
 
 # OAuth 提供商的模型排除列表
 oauth-excluded-models:
@@ -287,10 +281,6 @@ oauth-excluded-models:
     - "claude-3-5-haiku-20241022"
   codex:
     - "gpt-5-codex-mini"
-  qwen:
-    - "vision-model"
-  iflow:
-    - "tstars2.0"
 
 # 可选的 payload 配置
 payload:

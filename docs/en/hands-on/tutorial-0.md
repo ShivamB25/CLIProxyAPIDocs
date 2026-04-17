@@ -30,7 +30,7 @@ remote-management:
   disable-control-panel: false
 
 # Directory for storing authentication files, used to store authentication files
-# for Gemini CLI, Gemini Web, Qwen Code, and Codex.
+# for Gemini CLI, Gemini Web, Claude Code, and Codex.
 # The default setting is the .cli-proxy-api folder in your current account
 # directory, which is compatible with Windows and Linux environments.
 # The program will automatically create this folder when it starts for the first

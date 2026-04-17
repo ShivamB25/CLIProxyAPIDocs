@@ -18,18 +18,6 @@ Run the following command to logi (Claude OAuth on port 54545):
 docker run -rm -p 54545:54545 -v /path/to/your/config.yaml:/CLIProxyAPI/config.yaml -v /path/to/your/auth-dir:/root/.cli-proxy-api eceasy/cli-proxy-api:latest /CLIProxyAPI/CLIProxyAPI --claude-login
 ```
 
-Run the following command to login (Qwen OAuth):
-
-```bash
-docker run -it -rm -v /path/to/your/config.yaml:/CLIProxyAPI/config.yaml -v /path/to/your/auth-dir:/root/.cli-proxy-api eceasy/cli-proxy-api:latest /CLIProxyAPI/CLIProxyAPI --qwen-login
-```
-
-Run the following command to login (iFlow OAuth on port 11451):
-
-```bash
-docker run --rm -p 11451:11451 -v /path/to/your/config.yaml:/CLIProxyAPI/config.yaml -v /path/to/your/auth-dir:/root/.cli-proxy-api eceasy/cli-proxy-api:latest /CLIProxyAPI/CLIProxyAPI --iflow-login
-```
-
 Run the following command to login (Antigravity OAuth on port 51121):
 
 ```bash

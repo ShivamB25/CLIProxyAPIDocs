@@ -27,7 +27,7 @@ ampcode:
     - from: claude-sonnet-4-5-20250929
       to: gemini-claude-sonnet-4-5
     - from: claude-haiku-4-5-20251001
-      to: qwen3-coder-flash
+      to: gemini-2.5-flash-lite
 ```
 
 **Configuration Item Explanation:**

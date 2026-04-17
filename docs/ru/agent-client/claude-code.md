@@ -33,10 +33,10 @@ export ANTHROPIC_AUTH_TOKEN=sk-dummy
 # версия 2.x.x
 export ANTHROPIC_DEFAULT_OPUS_MODEL=gpt-5(high)
 export ANTHROPIC_DEFAULT_SONNET_MODEL=gpt-5(medium)
-export ANTHROPIC_DEFAULT_HAIKU_MODEL=gpt-5(minimal) # мы не рекомендуем использовать gpt-5(minimal), используйте вместо этого qwen3-coder-flash или gemini-2.5-flash-lite
+export ANTHROPIC_DEFAULT_HAIKU_MODEL=gpt-5(minimal) # мы не рекомендуем использовать gpt-5(minimal), используйте вместо этого gemini-2.5-flash-lite
 # версия 1.x.x
 export ANTHROPIC_MODEL=gpt-5
-export ANTHROPIC_SMALL_FAST_MODEL=gpt-5(minimal) # мы не рекомендуем использовать gpt-5(minimal), используйте вместо этого qwen3-coder-flash или gemini-2.5-flash-lite
+export ANTHROPIC_SMALL_FAST_MODEL=gpt-5(minimal) # мы не рекомендуем использовать gpt-5(minimal), используйте вместо этого gemini-2.5-flash-lite
 ```
 
 Использование моделей OpenAI GPT 5 Codex:
@@ -46,10 +46,10 @@ export ANTHROPIC_AUTH_TOKEN=sk-dummy
 # версия 2.x.x
 export ANTHROPIC_DEFAULT_OPUS_MODEL=gpt-5-codex(high)
 export ANTHROPIC_DEFAULT_SONNET_MODEL=gpt-5-codex(medium)
-export ANTHROPIC_DEFAULT_HAIKU_MODEL=gpt-5-codex(low) # мы не рекомендуем использовать gpt-5-codex(low), используйте вместо этого qwen3-coder-flash или gemini-2.5-flash-lite
+export ANTHROPIC_DEFAULT_HAIKU_MODEL=gpt-5-codex(low) # мы не рекомендуем использовать gpt-5-codex(low), используйте вместо этого gemini-2.5-flash-lite
 # версия 1.x.x
 export ANTHROPIC_MODEL=gpt-5-codex
-export ANTHROPIC_SMALL_FAST_MODEL=gpt-5-codex(low) # мы не рекомендуем использовать gpt-5-codex(low), используйте вместо этого qwen3-coder-flash или gemini-2.5-flash-lite
+export ANTHROPIC_SMALL_FAST_MODEL=gpt-5-codex(low) # мы не рекомендуем использовать gpt-5-codex(low), используйте вместо этого gemini-2.5-flash-lite
 ```
 
 Использование моделей Claude:
@@ -63,30 +63,4 @@ export ANTHROPIC_DEFAULT_HAIKU_MODEL=claude-3-5-haiku-20241022
 # версия 1.x.x
 export ANTHROPIC_MODEL=claude-sonnet-4-20250514
 export ANTHROPIC_SMALL_FAST_MODEL=claude-3-5-haiku-20241022
-```
-
-Использование моделей Qwen:
-```bash
-export ANTHROPIC_BASE_URL=http://127.0.0.1:8317
-export ANTHROPIC_AUTH_TOKEN=sk-dummy
-# версия 2.x.x
-export ANTHROPIC_DEFAULT_OPUS_MODEL=qwen3-coder-plus
-export ANTHROPIC_DEFAULT_SONNET_MODEL=qwen3-coder-plus
-export ANTHROPIC_DEFAULT_HAIKU_MODEL=qwen3-coder-flash
-# версия 1.x.x
-export ANTHROPIC_MODEL=qwen3-coder-plus
-export ANTHROPIC_SMALL_FAST_MODEL=qwen3-coder-flash
-```
-
-Использование моделей iFlow:
-```bash
-export ANTHROPIC_BASE_URL=http://127.0.0.1:8317
-export ANTHROPIC_AUTH_TOKEN=sk-dummy
-# версия 2.x.x
-export ANTHROPIC_DEFAULT_OPUS_MODEL=qwen3-max
-export ANTHROPIC_DEFAULT_SONNET_MODEL=qwen3-coder-plus
-export ANTHROPIC_DEFAULT_HAIKU_MODEL=qwen3-235b-a22b-instruct
-# версия 1.x.x
-export ANTHROPIC_MODEL=qwen3-max
-export ANTHROPIC_SMALL_FAST_MODEL=qwen3-235b-a22b-instruct
 ```

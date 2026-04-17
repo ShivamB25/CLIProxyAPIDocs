@@ -149,7 +149,7 @@ outline: 'deep'
       ```
     - 响应:
       ```json
-      {"debug":true,"proxy-url":"","api-keys":["1...5","JS...W"],"ampcode":{"upstream-url":"https://ampcode.com","restrict-management-to-localhost":true},"quota-exceeded":{"switch-project":true,"switch-preview-model":true},"gemini-api-key":[{"api-key":"AI...01","base-url":"https://generativelanguage.googleapis.com","headers":{"X-Custom-Header":"custom-value"},"proxy-url":"","excluded-models":["gemini-1.5-pro","gemini-1.5-flash"]},{"api-key":"AI...02","proxy-url":"socks5://proxy.example.com:1080","excluded-models":["gemini-pro-vision"]}],"request-log":true,"request-retry":3,"claude-api-key":[{"api-key":"cr...56","base-url":"https://example.com/api","proxy-url":"socks5://proxy.example.com:1080","models":[{"name":"claude-3-5-sonnet-20241022","alias":"claude-sonnet-latest"}],"excluded-models":["claude-3-opus"]},{"api-key":"cr...e3","base-url":"http://example.com:3000/api","proxy-url":""},{"api-key":"sk-...q2","base-url":"https://example.com","proxy-url":""}],"codex-api-key":[{"api-key":"sk...01","base-url":"https://example/v1","proxy-url":"","excluded-models":["gpt-4o-mini"]}],"openai-compatibility":[{"name":"openrouter","base-url":"https://openrouter.ai/api/v1","api-key-entries":[{"api-key":"sk...01","proxy-url":""}],"models":[{"name":"moonshotai/kimi-k2:free","alias":"kimi-k2"}]},{"name":"iflow","base-url":"https://apis.iflow.cn/v1","api-key-entries":[{"api-key":"sk...7e","proxy-url":"socks5://proxy.example.com:1080"}],"models":[{"name":"deepseek-v3.1","alias":"deepseek-v3.1"},{"name":"glm-4.5","alias":"glm-4.5"},{"name":"kimi-k2","alias":"kimi-k2"}]}]}
+      {"debug":true,"proxy-url":"","api-keys":["1...5","JS...W"],"ampcode":{"upstream-url":"https://ampcode.com","restrict-management-to-localhost":true},"quota-exceeded":{"switch-project":true,"switch-preview-model":true},"gemini-api-key":[{"api-key":"AI...01","base-url":"https://generativelanguage.googleapis.com","headers":{"X-Custom-Header":"custom-value"},"proxy-url":"","excluded-models":["gemini-1.5-pro","gemini-1.5-flash"]},{"api-key":"AI...02","proxy-url":"socks5://proxy.example.com:1080","excluded-models":["gemini-pro-vision"]}],"request-log":true,"request-retry":3,"claude-api-key":[{"api-key":"cr...56","base-url":"https://example.com/api","proxy-url":"socks5://proxy.example.com:1080","models":[{"name":"claude-3-5-sonnet-20241022","alias":"claude-sonnet-latest"}],"excluded-models":["claude-3-opus"]},{"api-key":"cr...e3","base-url":"http://example.com:3000/api","proxy-url":""},{"api-key":"sk-...q2","base-url":"https://example.com","proxy-url":""}],"codex-api-key":[{"api-key":"sk...01","base-url":"https://example/v1","proxy-url":"","excluded-models":["gpt-4o-mini"]}],"openai-compatibility":[{"name":"openrouter","base-url":"https://openrouter.ai/api/v1","api-key-entries":[{"api-key":"sk...01","proxy-url":""}],"models":[{"name":"moonshotai/kimi-k2:free","alias":"kimi-k2"}]}]}
       ```
     - 说明：
         - 返回中不再包含 `generative-language-api-key`；若需纯字符串视图，可使用专用的 `GET /generative-language-api-key` 接口。
@@ -794,7 +794,7 @@ outline: 'deep'
       {
         "oauth-excluded-models": {
           "openai": ["gpt-4.1-mini"],
-          "iflow": ["deepseek-v3.1", "glm-4.5"]
+          "claude": ["claude-3-5-haiku-20241022"]
         }
       }
       ```
@@ -803,7 +803,7 @@ outline: 'deep'
       ```bash
       curl -X PUT -H 'Content-Type: application/json' \
       -H 'Authorization: Bearer <MANAGEMENT_KEY>' \
-        -d '{"openai":["gpt-4.1-mini"],"iflow":["deepseek-v3.1","glm-4.5"]}' \
+        -d '{"openai":["gpt-4.1-mini"],"claude":["claude-3-5-haiku-20241022"]}' \
         http://localhost:8317/v0/management/oauth-excluded-models
       ```
     - 响应：
@@ -817,14 +817,14 @@ outline: 'deep'
       ```bash
       curl -X PATCH -H 'Content-Type: application/json' \
       -H 'Authorization: Bearer <MANAGEMENT_KEY>' \
-        -d '{"provider":"iflow","models":["deepseek-v3.1","glm-4.5"]}' \
+        -d '{"provider":"claude","models":["claude-3-5-haiku-20241022"]}' \
         http://localhost:8317/v0/management/oauth-excluded-models
       ```
     - 请求（通过空数组删除提供商）：
       ```bash
       curl -X PATCH -H 'Content-Type: application/json' \
       -H 'Authorization: Bearer <MANAGEMENT_KEY>' \
-        -d '{"provider":"iflow","models":[]}' \
+        -d '{"provider":"claude","models":[]}' \
         http://localhost:8317/v0/management/oauth-excluded-models
       ```
     - 响应：
@@ -837,7 +837,7 @@ outline: 'deep'
     - 请求：
       ```bash
       curl -H 'Authorization: Bearer <MANAGEMENT_KEY>' \
-        -X DELETE 'http://localhost:8317/v0/management/oauth-excluded-models?provider=iflow'
+        -X DELETE 'http://localhost:8317/v0/management/oauth-excluded-models?provider=claude'
       ```
     - 响应：
       ```json
@@ -973,7 +973,7 @@ outline: 'deep'
 
 以下端点用于发起各提供商的登录流程，并返回需要在浏览器中打开的 URL。流程完成后，令牌会保存到 `auths/` 目录。
 
-对于 Anthropic、Codex、Gemini CLI、Antigravity 与 iFlow，可附加 `?is_webui=true` 以便从管理界面复用内置回调转发。
+对于 Anthropic、Codex、Gemini CLI 与 Antigravity，可附加 `?is_webui=true` 以便从管理界面复用内置回调转发。
 
 - GET `/anthropic-auth-url` — 开始 Anthropic（Claude）登录
     - 请求：
@@ -1027,50 +1027,6 @@ outline: 'deep'
       ```
     - 说明：
         - 若从 Web UI 触发，可添加 `?is_webui=true`，服务会在本地 `51121` 端口启动临时回调转发器，并复用主 HTTP 端口接收最终重定向。
-
-- GET `/qwen-auth-url` — 开始 Qwen 登录（设备授权流程）
-    - 请求：
-      ```bash
-      curl -H 'Authorization: Bearer <MANAGEMENT_KEY>' \
-        http://localhost:8317/v0/management/qwen-auth-url
-      ```
-    - 响应：
-      ```json
-      { "status": "ok", "url": "https://...", "state": "gem-1716206400" }
-      ```
-
-- GET `/iflow-auth-url` — 开始 iFlow 登录
-    - 请求：
-      ```bash
-      curl -H 'Authorization: Bearer <MANAGEMENT_KEY>' \
-        http://localhost:8317/v0/management/iflow-auth-url
-      ```
-    - 响应：
-      ```json
-      { "status": "ok", "url": "https://...", "state": "ifl-1716206400" }
-      ```
-
-- POST `/iflow-auth-url` — 使用已有 iFlow Cookie 登录
-    - 请求体：
-      ```bash
-      curl -X POST -H 'Content-Type: application/json' \
-      -H 'Authorization: Bearer <MANAGEMENT_KEY>' \
-        -d '{"cookie":"<YOUR_IFLOW_COOKIE>"}' \
-        http://localhost:8317/v0/management/iflow-auth-url
-      ```
-    - 成功响应：
-      ```json
-      {
-        "status": "ok",
-        "saved_path": "/abs/path/auths/iflow-user.json",
-        "email": "user@example.com",
-        "expired": "2025-05-20T10:00:00Z",
-        "type": "cookie"
-      }
-      ```
-    - 说明：
-        - `cookie` 字段必填且不能为空，若缺失或格式不合法，会以 `400` 返回 `{ "status": "error", "error": "..." }`。
-        - 成功后服务会规范化 Cookie，换取 API token，将其保存为 `iflow-*.json` 认证文件，并返回保存路径与基础元信息。
 
 - GET `/get-auth-status?state=<state>` — 轮询 OAuth 流程状态
     - 请求：

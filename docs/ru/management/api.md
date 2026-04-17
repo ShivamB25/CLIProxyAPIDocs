@@ -148,7 +148,7 @@ outline: 'deep'
       ```
     - Ответ:
       ```json
-      {"debug":true,"proxy-url":"","api-keys":["1...5","JS...W"],"ampcode":{"upstream-url":"https://ampcode.com","restrict-management-to-localhost":true},"quota-exceeded":{"switch-project":true,"switch-preview-model":true},"gemini-api-key":[{"api-key":"AI...01","base-url":"https://generativelanguage.googleapis.com","headers":{"X-Custom-Header":"custom-value"},"proxy-url":"","excluded-models":["gemini-1.5-pro","gemini-1.5-flash"]},{"api-key":"AI...02","proxy-url":"socks5://proxy.example.com:1080","excluded-models":["gemini-pro-vision"]}],"request-log":true,"request-retry":3,"claude-api-key":[{"api-key":"cr...56","base-url":"https://example.com/api","proxy-url":"socks5://proxy.example.com:1080","models":[{"name":"claude-3-5-sonnet-20241022","alias":"claude-sonnet-latest"}],"excluded-models":["claude-3-opus"]},{"api-key":"cr...e3","base-url":"http://example.com:3000/api","proxy-url":""},{"api-key":"sk-...q2","base-url":"https://example.com","proxy-url":""}],"codex-api-key":[{"api-key":"sk...01","base-url":"https://example/v1","proxy-url":"","excluded-models":["gpt-4o-mini"]}],"openai-compatibility":[{"name":"openrouter","base-url":"https://openrouter.ai/api/v1","api-key-entries":[{"api-key":"sk...01","proxy-url":""}],"models":[{"name":"moonshotai/kimi-k2:free","alias":"kimi-k2"}]},{"name":"iflow","base-url":"https://apis.iflow.cn/v1","api-key-entries":[{"api-key":"sk...7e","proxy-url":"socks5://proxy.example.com:1080"}],"models":[{"name":"deepseek-v3.1","alias":"deepseek-v3.1"},{"name":"glm-4.5","alias":"glm-4.5"},{"name":"kimi-k2","alias":"kimi-k2"}]}]}
+      {"debug":true,"proxy-url":"","api-keys":["1...5","JS...W"],"ampcode":{"upstream-url":"https://ampcode.com","restrict-management-to-localhost":true},"quota-exceeded":{"switch-project":true,"switch-preview-model":true},"gemini-api-key":[{"api-key":"AI...01","base-url":"https://generativelanguage.googleapis.com","headers":{"X-Custom-Header":"custom-value"},"proxy-url":"","excluded-models":["gemini-1.5-pro","gemini-1.5-flash"]},{"api-key":"AI...02","proxy-url":"socks5://proxy.example.com:1080","excluded-models":["gemini-pro-vision"]}],"request-log":true,"request-retry":3,"claude-api-key":[{"api-key":"cr...56","base-url":"https://example.com/api","proxy-url":"socks5://proxy.example.com:1080","models":[{"name":"claude-3-5-sonnet-20241022","alias":"claude-sonnet-latest"}],"excluded-models":["claude-3-opus"]},{"api-key":"cr...e3","base-url":"http://example.com:3000/api","proxy-url":""},{"api-key":"sk-...q2","base-url":"https://example.com","proxy-url":""}],"codex-api-key":[{"api-key":"sk...01","base-url":"https://example/v1","proxy-url":"","excluded-models":["gpt-4o-mini"]}],"openai-compatibility":[{"name":"openrouter","base-url":"https://openrouter.ai/api/v1","api-key-entries":[{"api-key":"sk...01","proxy-url":""}],"models":[{"name":"moonshotai/kimi-k2:free","alias":"kimi-k2"}]}]}
       ```
 ```
     - Примечания:
@@ -789,7 +789,7 @@ outline: 'deep'
       {
         "oauth-excluded-models": {
           "openai": ["gpt-4.1-mini"],
-          "iflow": ["deepseek-v3.1", "glm-4.5"]
+          "claude": ["claude-3-5-haiku-20241022"]
         }
       }
       ```
@@ -798,7 +798,7 @@ outline: 'deep'
       ```bash
       curl -X PUT -H 'Content-Type: application/json' \
       -H 'Authorization: Bearer <MANAGEMENT_KEY>' \
-        -d '{"openai":["gpt-4.1-mini"],"iflow":["deepseek-v3.1","glm-4.5"]}' \
+        -d '{"openai":["gpt-4.1-mini"],"claude":["claude-3-5-haiku-20241022"]}' \
         http://localhost:8317/v0/management/oauth-excluded-models
       ```
     - Ответ:
@@ -812,14 +812,14 @@ outline: 'deep'
       ```bash
       curl -X PATCH -H 'Content-Type: application/json' \
       -H 'Authorization: Bearer <MANAGEMENT_KEY>' \
-        -d '{"provider":"iflow","models":["deepseek-v3.1","glm-4.5"]}' \
+        -d '{"provider":"claude","models":["claude-3-5-haiku-20241022"]}' \
         http://localhost:8317/v0/management/oauth-excluded-models
       ```
 - Запрос (удаление провайдера путем отправки пустого списка моделей):
       ```bash
       curl -X PATCH -H 'Content-Type: application/json' \
       -H 'Authorization: Bearer <MANAGEMENT_KEY>' \
-        -d '{"provider":"iflow","models":[]}' \
+        -d '{"provider":"claude","models":[]}' \
         http://localhost:8317/v0/management/oauth-excluded-models
       ```
     - Ответ:
@@ -832,7 +832,7 @@ outline: 'deep'
     - Запрос:
       ```bash
       curl -H 'Authorization: Bearer <MANAGEMENT_KEY>' \
-        -X DELETE 'http://localhost:8317/v0/management/oauth-excluded-models?provider=iflow'
+        -X DELETE 'http://localhost:8317/v0/management/oauth-excluded-models?provider=claude'
       ```
     - Ответ:
       ```json
@@ -966,7 +966,7 @@ outline: 'deep'
 
 Эти эндпоинты инициируют процессы входа провайдера и возвращают URL для открытия в браузере. Токены сохраняются в `auths/` после завершения процесса.
 
-Для Anthropic, Codex, Gemini CLI, Antigravity и iFlow вы можете добавить `?is_webui=true`, чтобы повторно использовать встроенный пересыльщик обратного вызова при запуске из управления Web UI.
+Для Anthropic, Codex, Gemini CLI и Antigravity вы можете добавить `?is_webui=true`, чтобы повторно использовать встроенный пересыльщик обратного вызова при запуске из управления Web UI.
 
 - GET `/anthropic-auth-url` — Запуск входа Anthropic (Claude)
     - Запрос:
@@ -1020,49 +1020,6 @@ outline: 'deep'
       ```
     - Примечания:
         - Добавьте `?is_webui=true` при запуске из встроенного Web UI, чтобы сервер запустил временный локальный перенаправитель обратного вызова (callback forwarder) на порту `51121` и повторно использовал основной HTTP-порт для финального перенаправления.
-- GET `/qwen-auth-url` — Запуск входа в Qwen (device flow)
-    - Запрос:
-      ```bash
-      curl -H 'Authorization: Bearer <MANAGEMENT_KEY>' \
-        http://localhost:8317/v0/management/qwen-auth-url
-      ```
-    - Ответ:
-      ```json
-      { "status": "ok", "url": "https://...", "state": "gem-1716206400" }
-      ```
-
-- GET `/iflow-auth-url` — Запуск входа в iFlow
-    - Запрос:
-      ```bash
-      curl -H 'Authorization: Bearer <MANAGEMENT_KEY>' \
-        http://localhost:8317/v0/management/iflow-auth-url
-      ```
-    - Ответ:
-      ```json
-      { "status": "ok", "url": "https://...", "state": "ifl-1716206400" }
-      ```
-
-- POST `/iflow-auth-url` — Аутентификация с использованием существующего iFlow cookie
-    - Тело запроса:
-      ```bash
-      curl -X POST -H 'Content-Type: application/json' \
-      -H 'Authorization: Bearer <MANAGEMENT_KEY>' \
-        -d '{"cookie":"<YOUR_IFLOW_COOKIE>"}' \
-        http://localhost:8317/v0/management/iflow-auth-url
-      ```
-- Успешный ответ:
-      ```json
-      {
-        "status": "ok",
-        "saved_path": "/abs/path/auths/iflow-user.json",
-        "email": "user@example.com",
-        "expired": "2025-05-20T10:00:00Z",
-        "type": "cookie"
-      }
-      ```
-    - Примечания:
-        - Поле `cookie` обязательно и не должно быть пустым; некорректные или неверно сформированные куки возвращают `400` с `{ "status": "error", "error": "..." }`.
-        - При успешном выполнении сервер нормализует куки, обменивает их на API token, сохраняет как файл авторизации `iflow-*.json` и возвращает путь сохранения и основные метаданные.
 
 - GET `/get-auth-status?state=<state>` — Опрос статуса процесса OAuth
     - Запрос:

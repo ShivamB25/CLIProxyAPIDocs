@@ -3,7 +3,7 @@ import {defineConfig} from 'vitepress'
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
     title: "CLIProxyAPI",
-    description: "Wrap Gemini CLI, ChatGPT Codex, Claude Code, Qwen Code, iFlow as an OpenAI/Gemini/Claude/Codex compatible API service, allowing you to enjoy the free Gemini 2.5 Pro, GPT 5, Claude, Qwen model through API",
+    description: "Wrap Gemini CLI, ChatGPT Codex, and Claude Code as an OpenAI/Gemini/Claude/Codex compatible API service, allowing you to enjoy free Gemini 2.5 Pro, GPT 5, and Claude models through an API",
     themeConfig: {
         // https://vitepress.dev/reference/default-theme-config
         nav: [
@@ -42,8 +42,6 @@ export default defineConfig({
                             {text: '反重力', link: '/cn/configuration/provider/antigravity'},
                             {text: 'Claude Code', link: '/cn/configuration/provider/claude-code'},
                             {text: 'Codex', link: '/cn/configuration/provider/codex'},
-                            {text: 'Qwen Code', link: '/cn/configuration/provider/qwen-code'},
-                            {text: 'iFlow', link: '/cn/configuration/provider/iflow'},
                             {text: 'AI Studio', link: '/cn/configuration/provider/ai-studio'},
                             {text: 'OpenAI 兼容', link: '/cn/configuration/provider/openai-compatibility'},
                             {text: 'Claude Code 兼容', link: '/cn/configuration/provider/claude-code-compatibility'},
@@ -84,7 +82,6 @@ export default defineConfig({
                 text: '配置案例',
                 items: [
                     {text: '零：配置详细解说', link: '/cn/hands-on/tutorial-0'},
-                    {text: '壹：项目介绍+Qwen实战', link: '/cn/hands-on/tutorial-1'},
                     {text: '贰：Gemini CLI+Codex实战', link: '/cn/hands-on/tutorial-2'},
                     {text: '叁：NanoBanana实战', link: '/cn/hands-on/tutorial-3'},
                     {text: '肆：中转转发接入篇', link: '/cn/hands-on/tutorial-4'},

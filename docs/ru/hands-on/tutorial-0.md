@@ -30,7 +30,7 @@ remote-management:
   disable-control-panel: false
 
 # Директория для хранения файлов аутентификации, используемая для хранения файлов аутентификации
-# для Gemini CLI, Gemini Web, Qwen Code и Codex.
+# для Gemini CLI, Gemini Web, Claude Code и Codex.
 # По умолчанию это папка .cli-proxy-api в директории вашей текущей учетной записи,
 # что совместимо с окружениями Windows и Linux.
 # Программа автоматически создаст эту папку при первом

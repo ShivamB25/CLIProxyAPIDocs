@@ -1,10 +1,8 @@
 # Two: Gemini CLI + Codex Hands-on
 
-In the previous article, we successfully converted Qwen Code into an API and called it in Cherry Studio through a simple configuration on CLIProxyAPI. I believe that by reading this, you have a preliminary understanding of the powerful functions and convenience of this tool.
-
 In this tutorial, we will continue to explore and integrate Codex and Gemini CLI.
 
-It should be noted that the configuration file used in this operation is the same as the one in the previous Qwen tutorial.
+If you already have a working `config.yaml`, you can reuse it here. Otherwise, the minimal example below is enough to follow along.
 
 ```yaml
 port: 8317
@@ -25,7 +23,7 @@ api-keys:
 
 ### Configure Codex
 
-First, let's configure Codex. The OAuth authorization process for Codex is very similar to the previous Qwen. Enter `cli-proxy-api --codex-login` in the terminal command line, and the system will automatically open the ChatGPT authorization page. Please log in with your ChatGPT account.
+First, let's configure Codex. Enter `cli-proxy-api --codex-login` in the terminal command line, and the system will automatically open the ChatGPT authorization page. Please log in with your ChatGPT account.
 
 ![](https://img.072899.xyz/2025/09/8d78b93fcfb3e111a93f6437f9a6acfa.png)
 
@@ -95,7 +93,7 @@ Back in the terminal command line, you can see that the authentication file has 
 
 ![](https://img.072899.xyz/2025/09/8682dc8a08bffd34d7900819e1073960.png)
 
-Some readers may be curious why the command line information after successful verification of Codex and Gemini CLI is different from that of Qwen. The answer is that when verifying Codex and Gemini CLI, CLIProxyAPI will listen to a specific port locally to receive callbacks, so the verification is always successful at one time. When verifying Qwen, CLIProxyAPI will directly obtain authorization information from Qwen's verification server, so there will be up to 60 attempts.
+You may notice the verification output includes a local callback step. For Codex and Gemini CLI, CLIProxyAPI listens on a local port to receive callbacks, so the flow typically completes in a single attempt.
 
 ### Verify the model
 

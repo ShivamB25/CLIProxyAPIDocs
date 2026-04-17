@@ -18,17 +18,6 @@ docker run --rm -p 1455:1455 -v /path/to/your/config.yaml:/CLIProxyAPI/config.ya
 docker run -rm -p 54545:54545 -v /path/to/your/config.yaml:/CLIProxyAPI/config.yaml -v /path/to/your/auth-dir:/root/.cli-proxy-api eceasy/cli-proxy-api:latest /CLIProxyAPI/CLIProxyAPI --claude-login
 ```
 
-Выполните следующую команду для входа (Qwen OAuth):
-
-```bash
-docker run -it -rm -v /path/to/your/config.yaml:/CLIProxyAPI/config.yaml -v /path/to/your/auth-dir:/root/.cli-proxy-api eceasy/cli-proxy-api:latest /CLIProxyAPI/CLIProxyAPI --qwen-login
-```
-Выполните следующую команду для входа (iFlow OAuth на порту 11451):
-
-```bash
-docker run --rm -p 11451:11451 -v /path/to/your/config.yaml:/CLIProxyAPI/config.yaml -v /path/to/your/auth-dir:/root/.cli-proxy-api eceasy/cli-proxy-api:latest /CLIProxyAPI/CLIProxyAPI --iflow-login
-```
-
 Выполните следующую команду для входа (Antigravity OAuth на порту 51121):
 
 ```bash

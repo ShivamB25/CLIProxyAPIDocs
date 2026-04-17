@@ -232,7 +232,7 @@ ampcode:
 
 # Global OAuth model name aliases (per channel)
 # These aliases rename model IDs for both model listing and request routing.
-# Supported channels: gemini-cli, vertex, aistudio, antigravity, claude, codex, qwen, iflow.
+# Supported channels: gemini-cli, vertex, aistudio, antigravity, claude, codex.
 # NOTE: Aliases do not apply to gemini-api-key, codex-api-key, claude-api-key, openai-compatibility, vertex-api-key, or ampcode.
 # You can repeat the same name with different aliases to expose multiple client model names.
 oauth-model-alias:
@@ -267,12 +267,6 @@ oauth-model-alias:
 #   codex:
 #     - name: "gpt-5"
 #       alias: "g5"
-#   qwen:
-#     - name: "qwen3-coder-plus"
-#       alias: "qwen-plus"
-#   iflow:
-#     - name: "glm-4.7"
-#       alias: "glm-god"
 
 # OAuth provider excluded models
 oauth-excluded-models:
@@ -291,10 +285,6 @@ oauth-excluded-models:
     - "claude-3-5-haiku-20241022"
   codex:
     - "gpt-5-codex-mini"
-  qwen:
-    - "vision-model"
-  iflow:
-    - "tstars2.0"
 
 # Optional payload configuration
 payload:

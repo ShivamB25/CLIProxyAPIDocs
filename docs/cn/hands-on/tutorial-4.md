@@ -1,6 +1,6 @@
 # 肆：中转转发接入篇
 
-在前几篇文章中，我们已经成功通过 OAuth 或 Cookie 方式接入了 Qwen、Codex、Gemini CLI 和 Gemini Web。在本篇教程中，我们将更进一步，学习如何便捷地将各类 AI 中转服务接入 CLIProxyAPI。
+在前几篇文章中，我们已经成功通过 OAuth 或 Cookie 方式接入了 Codex、Gemini CLI 和 Gemini Web。在本篇教程中，我们将更进一步，学习如何便捷地将各类 AI 中转服务接入 CLIProxyAPI。
 
 首先，让我们回顾一下之前使用的配置文件：
 
@@ -157,4 +157,3 @@ openai-compatibility:
 可以看到，`openai-compatibility` 的配置逻辑与之前略有不同：同一供应商（Provider）下的所有 `api-key` 共享同一个 `base-url`。
 
 至此，配置就完成了。剩下的模型连通性验证，就留给各位读者自行测试了。
-

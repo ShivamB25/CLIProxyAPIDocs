@@ -1,10 +1,8 @@
 # 贰：Gemini CLI+Codex实战
 
-在之前的文章中，我们通过在 CLIProxyAPI 上的简单配置，成功将 Qwen Code 转换成了 API 并在 Cherry Studio 中调用。相信读到这里的你，已经对这款工具的强大功能和便捷性有了初步认识。
-
 在本篇教程中，我们将继续探讨，并把 Codex 和 Gemini CLI 也集成进来。
 
-需要说明的是，本次操作所使用的配置文件与上一篇 Qwen 教程中的是同一个
+如果你已经有可用的 `config.yaml`，可以直接复用；否则下方的最小示例即可。
 
 ```yaml
 port: 8317
@@ -25,7 +23,7 @@ api-keys:
 
 ### 配置 Codex
 
-首先，我们来配置 Codex。Codex 的 OAuth 授权流程与之前的 Qwen 非常相似。在终端命令行中输入 `cli-proxy-api --codex-login`，系统会自动打开 ChatGPT 的授权页面，请使用你的 ChatGPT 账号登录。
+首先，我们来配置 Codex。在终端命令行中输入 `cli-proxy-api --codex-login`，系统会自动打开 ChatGPT 的授权页面，请使用你的 ChatGPT 账号登录。
 
 ![](https://img.072899.xyz/2025/09/8d78b93fcfb3e111a93f6437f9a6acfa.png)
 
@@ -95,7 +93,7 @@ api-keys:
 
 ![](https://img.072899.xyz/2025/09/8682dc8a08bffd34d7900819e1073960.png)
 
-有些读者可能会好奇，为什么 Codex 和 Gemini CLI 在验证成功后的命令行信息，与 Qwen 有所不同？答案是，在验证 Codex 和 Gemini CLI 时，CLIProxyAPI 会在本地监听一个特定端口以接收回调，因此验证总是一次成功。而在验证 Qwen 时，CLIProxyAPI 会直接从 Qwen 的验证服务器来获取授权信息，因此最多会有 60 次的尝试请求。
+你可能会注意到验证流程会在本地监听一个特定端口以接收回调，因此通常一次成功。
 
 ### 验证模型
 

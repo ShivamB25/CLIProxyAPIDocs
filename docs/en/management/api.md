@@ -149,7 +149,7 @@ If a plaintext key is detected in the config at startup, it will be bcrypt‑has
       ```
     - Response:
       ```json
-      {"debug":true,"proxy-url":"","api-keys":["1...5","JS...W"],"ampcode":{"upstream-url":"https://ampcode.com","restrict-management-to-localhost":true},"quota-exceeded":{"switch-project":true,"switch-preview-model":true},"gemini-api-key":[{"api-key":"AI...01","base-url":"https://generativelanguage.googleapis.com","headers":{"X-Custom-Header":"custom-value"},"proxy-url":"","excluded-models":["gemini-1.5-pro","gemini-1.5-flash"]},{"api-key":"AI...02","proxy-url":"socks5://proxy.example.com:1080","excluded-models":["gemini-pro-vision"]}],"request-log":true,"request-retry":3,"claude-api-key":[{"api-key":"cr...56","base-url":"https://example.com/api","proxy-url":"socks5://proxy.example.com:1080","models":[{"name":"claude-3-5-sonnet-20241022","alias":"claude-sonnet-latest"}],"excluded-models":["claude-3-opus"]},{"api-key":"cr...e3","base-url":"http://example.com:3000/api","proxy-url":""},{"api-key":"sk-...q2","base-url":"https://example.com","proxy-url":""}],"codex-api-key":[{"api-key":"sk...01","base-url":"https://example/v1","proxy-url":"","excluded-models":["gpt-4o-mini"]}],"openai-compatibility":[{"name":"openrouter","base-url":"https://openrouter.ai/api/v1","api-key-entries":[{"api-key":"sk...01","proxy-url":""}],"models":[{"name":"moonshotai/kimi-k2:free","alias":"kimi-k2"}]},{"name":"iflow","base-url":"https://apis.iflow.cn/v1","api-key-entries":[{"api-key":"sk...7e","proxy-url":"socks5://proxy.example.com:1080"}],"models":[{"name":"deepseek-v3.1","alias":"deepseek-v3.1"},{"name":"glm-4.5","alias":"glm-4.5"},{"name":"kimi-k2","alias":"kimi-k2"}]}]}
+      {"debug":true,"proxy-url":"","api-keys":["1...5","JS...W"],"ampcode":{"upstream-url":"https://ampcode.com","restrict-management-to-localhost":true},"quota-exceeded":{"switch-project":true,"switch-preview-model":true},"gemini-api-key":[{"api-key":"AI...01","base-url":"https://generativelanguage.googleapis.com","headers":{"X-Custom-Header":"custom-value"},"proxy-url":"","excluded-models":["gemini-1.5-pro","gemini-1.5-flash"]},{"api-key":"AI...02","proxy-url":"socks5://proxy.example.com:1080","excluded-models":["gemini-pro-vision"]}],"request-log":true,"request-retry":3,"claude-api-key":[{"api-key":"cr...56","base-url":"https://example.com/api","proxy-url":"socks5://proxy.example.com:1080","models":[{"name":"claude-3-5-sonnet-20241022","alias":"claude-sonnet-latest"}],"excluded-models":["claude-3-opus"]},{"api-key":"cr...e3","base-url":"http://example.com:3000/api","proxy-url":""},{"api-key":"sk-...q2","base-url":"https://example.com","proxy-url":""}],"codex-api-key":[{"api-key":"sk...01","base-url":"https://example/v1","proxy-url":"","excluded-models":["gpt-4o-mini"]}],"openai-compatibility":[{"name":"openrouter","base-url":"https://openrouter.ai/api/v1","api-key-entries":[{"api-key":"sk...01","proxy-url":""}],"models":[{"name":"moonshotai/kimi-k2:free","alias":"kimi-k2"}]}]}
       ```
     - Notes:
         - The response no longer includes `generative-language-api-key`; use `GET /generative-language-api-key` if you need a pure-string view.
@@ -794,7 +794,7 @@ Configure per-provider model blocks for OAuth-based providers. Keys are provider
       {
         "oauth-excluded-models": {
           "openai": ["gpt-4.1-mini"],
-          "iflow": ["deepseek-v3.1", "glm-4.5"]
+          "claude": ["claude-3-5-haiku-20241022"]
         }
       }
       ```
@@ -803,7 +803,7 @@ Configure per-provider model blocks for OAuth-based providers. Keys are provider
       ```bash
       curl -X PUT -H 'Content-Type: application/json' \
       -H 'Authorization: Bearer <MANAGEMENT_KEY>' \
-        -d '{"openai":["gpt-4.1-mini"],"iflow":["deepseek-v3.1","glm-4.5"]}' \
+        -d '{"openai":["gpt-4.1-mini"],"claude":["claude-3-5-haiku-20241022"]}' \
         http://localhost:8317/v0/management/oauth-excluded-models
       ```
     - Response:
@@ -817,14 +817,14 @@ Configure per-provider model blocks for OAuth-based providers. Keys are provider
       ```bash
       curl -X PATCH -H 'Content-Type: application/json' \
       -H 'Authorization: Bearer <MANAGEMENT_KEY>' \
-        -d '{"provider":"iflow","models":["deepseek-v3.1","glm-4.5"]}' \
+        -d '{"provider":"claude","models":["claude-3-5-haiku-20241022"]}' \
         http://localhost:8317/v0/management/oauth-excluded-models
       ```
     - Request (delete provider by sending empty models):
       ```bash
       curl -X PATCH -H 'Content-Type: application/json' \
       -H 'Authorization: Bearer <MANAGEMENT_KEY>' \
-        -d '{"provider":"iflow","models":[]}' \
+        -d '{"provider":"claude","models":[]}' \
         http://localhost:8317/v0/management/oauth-excluded-models
       ```
     - Response:
@@ -837,7 +837,7 @@ Configure per-provider model blocks for OAuth-based providers. Keys are provider
     - Request:
       ```bash
       curl -H 'Authorization: Bearer <MANAGEMENT_KEY>' \
-        -X DELETE 'http://localhost:8317/v0/management/oauth-excluded-models?provider=iflow'
+        -X DELETE 'http://localhost:8317/v0/management/oauth-excluded-models?provider=claude'
       ```
     - Response:
       ```json
@@ -973,7 +973,7 @@ Mirrors the CLI `vertex-import` helper and stores Google service account JSON as
 
 These endpoints initiate provider login flows and return a URL to open in a browser. Tokens are saved under `auths/` once the flow completes.
 
-For Anthropic, Codex, Gemini CLI, Antigravity, and iFlow you can append `?is_webui=true` to reuse the embedded callback forwarder when launching from the management UI.
+For Anthropic, Codex, Gemini CLI, and Antigravity you can append `?is_webui=true` to reuse the embedded callback forwarder when launching from the management UI.
 
 - GET `/anthropic-auth-url` — Start Anthropic (Claude) login
     - Request:
@@ -1027,50 +1027,6 @@ For Anthropic, Codex, Gemini CLI, Antigravity, and iFlow you can append `?is_web
       ```
     - Notes:
         - Add `?is_webui=true` when triggering from the built-in UI so the server starts a temporary local callback forwarder on port `51121` and reuses the main HTTP port for the final redirect.
-
-- GET `/qwen-auth-url` — Start Qwen login (device flow)
-    - Request:
-      ```bash
-      curl -H 'Authorization: Bearer <MANAGEMENT_KEY>' \
-        http://localhost:8317/v0/management/qwen-auth-url
-      ```
-    - Response:
-      ```json
-      { "status": "ok", "url": "https://...", "state": "gem-1716206400" }
-      ```
-
-- GET `/iflow-auth-url` — Start iFlow login
-    - Request:
-      ```bash
-      curl -H 'Authorization: Bearer <MANAGEMENT_KEY>' \
-        http://localhost:8317/v0/management/iflow-auth-url
-      ```
-    - Response:
-      ```json
-      { "status": "ok", "url": "https://...", "state": "ifl-1716206400" }
-      ```
-
-- POST `/iflow-auth-url` — Authenticate using an existing iFlow cookie
-    - Request body:
-      ```bash
-      curl -X POST -H 'Content-Type: application/json' \
-      -H 'Authorization: Bearer <MANAGEMENT_KEY>' \
-        -d '{"cookie":"<YOUR_IFLOW_COOKIE>"}' \
-        http://localhost:8317/v0/management/iflow-auth-url
-      ```
-    - Successful response:
-      ```json
-      {
-        "status": "ok",
-        "saved_path": "/abs/path/auths/iflow-user.json",
-        "email": "user@example.com",
-        "expired": "2025-05-20T10:00:00Z",
-        "type": "cookie"
-      }
-      ```
-    - Notes:
-        - The `cookie` field is required and must be non-empty; invalid or malformed cookies return `400` with `{ "status": "error", "error": "..." }`.
-        - On success the server normalizes the cookie, exchanges it for an API token, persists it as an `iflow-*.json` auth file, and returns the saved path and basic metadata.
 
 - GET `/get-auth-status?state=<state>` — Poll OAuth flow status
     - Request:
